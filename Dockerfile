@@ -1,31 +1,20 @@
-FROM python:3.11
+FROM xyz.dkr.ecr.region.amazonaws.com/docker-hub/library/python:3.11
 
-# Install Python deps + modules tambahan
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir \
-        jupyterlab jupyter_kernel_gateway ipykernel \
-        ploomber ploomber-engine \
-        matplotlib seaborn plotly \
-        pandas numpy scipy scikit-learn \
-        pygraphviz tqdm rich \
-        dvc[all] papermill \
-        requests pyyaml sqlalchemy joblib \
-        jupyter_collaboration \
-        pyTelegramBotAPI \
-        psutil
+# Install system dependencies for building Python packages
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        graphviz \
+        libgraphviz-dev \
+        build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy project requirements
+# Upgrade pip and install Python packages from requirements.txt
 COPY requirements.txt /tmp/requirements.txt
-RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Copy Jupyter config
-COPY jupyter_server_config.py /root/.jupyter/jupyter_server_config.py
-
-# Workdir
-WORKDIR /app
-
-# Expose port 80
+# Expose port 80 (required by platform)
 EXPOSE 80
 
-# Entrypoint: listen di port 80
-ENTRYPOINT ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--port=80", "--allow-root"]
+# Command to run the application
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=80", "--server.address=0.0.0.0"]
