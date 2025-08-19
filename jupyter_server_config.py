@@ -2,12 +2,16 @@ c = get_config()  # noqa
 
 # Listen di semua IP
 c.ServerApp.ip = "0.0.0.0"
-c.ServerApp.allow_origin = "*"  # akses dari mana saja
-c.ServerApp.token = ""          # disable token
-c.ServerApp.password = ""       # disable password
 
-# Enable collaborative mode
-c.LabApp.collaborative = True
+# Allow access dari mana saja
+c.ServerApp.allow_origin = "*"
 
-# Set default notebook dir
+# Nonaktifkan token/password supaya platform bisa akses
+c.ServerApp.token = ""
+c.ServerApp.password = ""
+
+# Notebook root directory
 c.ServerApp.notebook_dir = "/app"
+
+# Aktifkan collaborative mode jika ingin
+c.LabApp.collaborative = True
