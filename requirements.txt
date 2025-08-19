@@ -1,0 +1,30 @@
+# Data processing
+numpy
+pandas
+scipy
+scikit-learn
+sqlalchemy
+joblib
+
+# Visualization
+matplotlib
+seaborn
+plotly
+pygraphviz
+
+# Pipeline / notebooks
+ploomber
+ploomber-engine
+papermill
+jupyter_kernel_gateway
+ipykernel
+jupyterlab
+
+# Utilities
+tqdm
+rich
+requests
+pyyaml
+
+# Versioning / workflow management
+dvc[all]
