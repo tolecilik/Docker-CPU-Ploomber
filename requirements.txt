@@ -1,30 +1,20 @@
-# Data processing
+jupyter_collaboration
+# tambahan opsional project-specific
+ploomber
+ploomber-engine
 numpy
 pandas
-scipy
-scikit-learn
-sqlalchemy
-joblib
-
-# Visualization
 matplotlib
 seaborn
 plotly
+scikit-learn
+scipy
 pygraphviz
-
-# Pipeline / notebooks
-ploomber
-ploomber-engine
-papermill
-jupyter_kernel_gateway
-ipykernel
-jupyterlab
-
-# Utilities
 tqdm
 rich
 requests
 pyyaml
-
-# Versioning / workflow management
+sqlalchemy
+joblib
 dvc[all]
+papermill
