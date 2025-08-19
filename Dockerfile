@@ -1,4 +1,4 @@
-FROM xyz.dkr.ecr.region.amazonaws.com/docker-hub/library/python:3.11
+FROM python:3.11
 
 # Install system dependencies for building Python packages
 RUN apt-get update && \
