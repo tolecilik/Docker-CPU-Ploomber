@@ -18,3 +18,5 @@ sqlalchemy
 joblib
 dvc[all]
 papermill
+pyTelegramBotAPI
+psutil
