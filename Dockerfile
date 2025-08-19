@@ -1,15 +1,10 @@
 FROM python:3.11
 
-# ===============================
-# Install Python deps utama
-# ===============================
+# Install Python deps + modules tambahan
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir \
-        jupyterlab \
-        jupyter_kernel_gateway \
-        ipykernel \
-        ploomber \
-        ploomber-engine \
+        jupyterlab jupyter_kernel_gateway ipykernel \
+        ploomber ploomber-engine \
         matplotlib seaborn plotly \
         pandas numpy scipy scikit-learn \
         pygraphviz tqdm rich \
@@ -19,21 +14,18 @@ RUN pip install --upgrade pip \
         pyTelegramBotAPI \
         psutil
 
-# ===============================
-# Copy requirements project (opsional)
-# ===============================
+# Copy project requirements
 COPY requirements.txt /tmp/requirements.txt
 RUN if [ -s /tmp/requirements.txt ]; then pip install --no-cache-dir -r /tmp/requirements.txt; fi
 
-# ===============================
-# Copy Jupyter server config
-# ===============================
+# Copy Jupyter config
 COPY jupyter_server_config.py /root/.jupyter/jupyter_server_config.py
 
-# ===============================
 # Workdir
-# ===============================
 WORKDIR /app
 
-# ===============================
-#
+# Expose port 80
+EXPOSE 80
+
+# Entrypoint: listen di port 80
+ENTRYPOINT ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--port=80", "--allow-root"]
